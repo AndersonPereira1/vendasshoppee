@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oferta Relâmpago</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background: linear-gradient(-45deg,#ee4d2d,#ff7337,#ff9a3c,#ee4d2d);
+    background-size:400% 400%;
+    animation:gradient 10s ease infinite;
+}
+@keyframes gradient{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+.timer{
+    background:black;
+    color:yellow;
+    padding:10px;
+    text-align:center;
+    font-weight:bold;
+    border-radius:8px;
+}
+
+.preco{
+    font-size:30px;
+    color:#ee4d2d;
+    font-weight:bold;
+}
+
+.avaliacao{
+    color:gold;
+    font-size:20px;
+}
+
+.botao{
+    display:block;
+    text-align:center;
+    background:#ee4d2d;
+    color:white;
+    padding:15px;
+    margin-top:20px;
+    text-decoration:none;
+    font-size:20px;
+    border-radius:10px;
+    font-weight:bold;
+    animation:pulsar 1.5s infinite;
+}
+@keyframes pulsar{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+.urgencia{
+    color:red;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.cupom{
+    background:yellow;
+    padding:10px;
+    text-align:center;
+    font-weight:bold;
+    margin-top:10px;
+    animation:piscando 1s infinite;
+}
+@keyframes piscando{
+    0%{opacity:1;}
+    50%{opacity:0.5;}
+    100%{opacity:1;}
+}
+
+.notificacao{
+    position:fixed;
+    bottom:90px;
+    left:20px;
+    background:white;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    font-size:14px;
+    display:none;
+}
+
+.barra-fixa{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#ee4d2d;
+    padding:15px;
+    text-align:center;
+}
+.barra-fixa a{
+    color:white;
+    font-size:20px;
+    text-decoration:none;
+    font-weight:bold;
+}
+footer{height:80px;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="timer">
+⏳ Oferta termina em: <span id="contador"></span>
+</div>
+
+<h2>Nome do Produto</h2>
+
+<img src="SUA-IMAGEM.jpg" width="100%">
+
+<div class="avaliacao">
+★★★★★ (4.9 de 5)
+</div>
+
+<p class="preco">R$ 89,90</p>
+
+<div class="cupom">
+🎟️ CUPOM: DESCONTO10
+</div>
+
+<div>
+🔥 <span id="vendidos">134</span> vendidos hoje
+</div>
+
+<div>
+👀 <span id="visitando">18</span> pessoas vendo agora
+</div>
+
+<div class="urgencia">
+⚠️ Restam apenas <span id="estoque">27</span> unidades!
+</div>
+
+<a href="SEU-LINK-AQUI" target="_blank" class="botao">
+🛒 COMPRAR AGORA
+</a>
+
+</div>
+
+<div id="notificacao" class="notificacao">
+🛒 Carlos acabou de comprar!
+</div>
+
+<div class="barra-fixa">
+<a href="SEU-LINK-AQUI" target="_blank">
+🚀 GARANTIR DESCONTO AGORA
+</a>
+</div>
+
+<footer></footer>
+
+<script>
+
+// CRONÔMETRO 20 MIN
+var tempo=1200;
+setInterval(function(){
+    var m=Math.floor(tempo/60);
+    var s=tempo%60;
+    document.getElementById("contador").innerHTML=m+"m "+s+"s";
+    tempo--;
+    if(tempo<0) tempo=0;
+},1000);
+
+// VENDAS AUMENTANDO
+setInterval(function(){
+    var v=document.getElementById("vendidos");
+    v.innerHTML=parseInt(v.innerHTML)+1;
+},15000);
+
+// VISUALIZANDO VARIANDO
+setInterval(function(){
+    document.getElementById("visitando").innerHTML=
+    Math.floor(Math.random()*15)+10;
+},5000);
+
+// ESTOQUE DIMINUINDO
+setInterval(function(){
+    var e=document.getElementById("estoque");
+    if(parseInt(e.innerHTML)>5){
+        e.innerHTML=parseInt(e.innerHTML)-1;
+    }
+},20000);
+
+// NOTIFICAÇÃO COMPRA
+var nomes=["Carlos","Mariana","João","Fernanda","Lucas","Ana","Pedro","Juliana"];
+function mostrarNotificacao(){
+    var nome=nomes[Math.floor(Math.random()*nomes.length)];
+    var n=document.getElementById("notificacao");
+    n.innerHTML="🛒 <strong>"+nome+"</strong> acabou de comprar!";
+    n.style.display="block";
+    setTimeout(function(){n.style.display="none";},4000);
+}
+setInterval(mostrarNotificacao,12000);
+
+</script>
+
+</body>
+</html>
